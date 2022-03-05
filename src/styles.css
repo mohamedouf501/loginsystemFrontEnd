@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+html , body {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(./assets/image/login-img.webp);
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    color: #fff;
+}
+body::-webkit-scrollbar{
+    background-color: #fbceb5;
+}
+body::-webkit-scrollbar-thumb{
+           background-color: #fff;
+
+    /* background-color: #fbceb5; */
+}
+body::-webkit-scrollbar-track-piece {
+    background-color: #fbceb5;
+
+} 
+.clickable{
+    cursor: pointer ;
+}
+
+

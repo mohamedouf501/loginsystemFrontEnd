@@ -1,0 +1,43 @@
+
+<section class=" d-flex pt-5 align-items-center justify-content-center ">
+    <div *ngIf="isLoading" id="loadingspinner" class=" d-flex bg-dark  align-items-center justify-content-center "  >
+        <app-loadingspinner></app-loadingspinner>
+    </div> 
+    <div class="container ">
+        <div class=" ">
+            <h2 class=" mx-4"> SIGN UP</h2>
+            <h6 *ngIf="error" class="alert alert-danger col-md-4 m-3 ">{{error}}</h6>
+            <div class="">
+                <form [formGroup]="signINForm" (ngSubmit)="submitSignINForm(signINForm)" class="">
+                    <div class="">
+                        <div class="form-floating  col-md-6  m-3"> <input type="email" formControlName="email"
+                                class="form-control" id="Email" placeholder="name@example.com" /> <label for="">Email
+                                address</label> </div>
+                        <div *ngIf=" signINForm.get('email')?.errors != null && signINForm.get('email')?.touched "
+                            class=" text-warning m-3">
+                            <div *ngIf="signINForm.get('email')?.errors?.['required']"> email is required. </div>
+                            <div *ngIf="signINForm.get('email')?.errors?.['email']"> email is invalid </div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <div class="form-floating  col-md-6  m-3"> <input type="password" formControlName="password"
+                                class="form-control" id="Password" placeholder="Password" /> <label
+                                for="Password">Password</label> </div>
+                        <div *ngIf=" signINForm.get('Password')?.errors != null && signINForm.get('Password')?.touched "
+                            class=" text-warning m-3">
+                            <div *ngIf="signINForm.get('Password')?.errors?.['required']"> Password is required. </div>
+                            <div *ngIf="signINForm.get('Password')?.errors?.['Password']"> Password is invalid </div>
+                        </div>
+                    </div>
+                    <div class=" pb-5 pt-3 col-md-6 mx-3   ">
+                        <button class="btn form-control " [disabled]="signINForm.invalid"> SIGN IN </button>
+                    </div>
+                </form>
+                <div class="mx-5 ">
+                   
+                    <a  routerLink='/signup' routerLinkActive="router-link-active"  class="text-white text-decoration-none "> —don't have an account? register—</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

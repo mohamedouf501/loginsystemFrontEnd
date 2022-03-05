@@ -1,0 +1,15 @@
+<section  class="position-relative">
+    <div *ngIf="isChanged"   class="bg-light py-2  position-absolute w-100 h-100">
+        <mat-spinner class="m-auto"></mat-spinner>
+    </div>
+    <div  class=" container">
+        <h6 *ngIf="error" class="alert alert-danger">{{error}}</h6>
+       <div class="d-flex justify-content-end p-2 clickable">
+        <mat-icon aria-hidden="false" (click)="close()"  aria-label="Example home icon">close</mat-icon>
+       </div>
+       <div class="">
+        <input type="text" class="form-control" #changeNameInput placeholder="New Name">
+       </div>
+        <button type="button" class="btn btn-primary my-2"  (click)="changeNameMethod(changeNameInput.value)">Save</button>
+    </div> 
+</section>

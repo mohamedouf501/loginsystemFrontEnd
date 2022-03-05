@@ -1,0 +1,63 @@
+<section class="pt-4">
+    <div class="container w-50  m-auto">
+        <div>
+            <table class="table  text-white table-striped">
+                <tr>
+                    <td>
+                        Name
+                    </td>
+                    <td>
+                        {{ name || User.name }}
+                    </td>
+                    <td class="clickable" (click)="changeNameStatus()" *ngIf="!changeName">
+                        Change
+                    </td>
+
+                </tr>
+                <tr class="position-relative ">
+
+                    <td colspan="3" *ngIf="changeName" [@Open]>
+                        <app-change-name [status]='changeName' (Changestatus)="changeName=$event"
+                        (NewName)="name=$event"></app-change-name>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Email
+                    </td>
+                    <td>
+                        {{User.email}}
+
+                    </td>
+                    <td class="clickable">
+                        
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        Password </td>
+                    <td>
+                        ********
+                    </td>
+                    <td class="clickable">
+                        Change
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Age
+                    </td>
+                    <td>
+                        {{User.age}}
+
+                    </td>
+                    <td class="clickable">
+                        Change
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
