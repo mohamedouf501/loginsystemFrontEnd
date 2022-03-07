@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, catchError, Observable, throwError } from 'rxjs';
@@ -63,6 +63,13 @@ export class AuthService {
   forgotPassword(data:object)
   {
     return this.http.post(`https://secureloginsystem.herokuapp.com/api/v1/users/forgotPassword`,data).pipe(catchError(this.handleError));
+  }
+resetPassword(data:any)
+  { 
+    let body = {
+      password : data.password
+    }
+    return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/resetPassword/${data.token}`,body).pipe(catchError(this.handleError));
   }
 }
 

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { EmailValidator } from '@angular/forms';
@@ -11,7 +12,7 @@ export class ResetPasswordComponent implements OnInit {
   find:boolean=true
   Reset:boolean=false
   error:string=''
-  constructor(private Auth:AuthService) { }
+  constructor(private Auth:AuthService , private router :Router) { }
 
   ngOnInit(): void {
   }
@@ -38,5 +39,29 @@ export class ResetPasswordComponent implements OnInit {
    
     
   }
+  resetPassword(password:string , token:string){
+    let  body = {
+      password:password,
+      token:token
+     }
+     console.log(body);
+     
+     this.Auth.resetPassword(body).subscribe({
+       next:(res)=>{
+         console.log(res)
+       },
+ 
+       error:(err)=>{
+         this.error=err.message
+ 
+       },
+ 
+       complete:()=>{
+         this.router.navigate(['/signin'])
+       }
+     })
+    
+     
+   }
 
 }
