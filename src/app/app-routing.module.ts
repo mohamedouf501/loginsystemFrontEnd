@@ -11,29 +11,22 @@ import { ProfileComponent } from './coreModule/profile/profile.component';
 import { RegistrationComponent } from './coreModule/registration/registration.component';
 import { AuthGuard } from './Guards/auth.guard';
 import { ChangePasswordComponent } from './coreModule/change-password/change-password.component';
+import { ResetPasswordComponent } from './coreModule/reset-password/reset-password.component';
 
 const routes: Routes = [
-
   { path: '', redirectTo: "home", pathMatch: "full" },
   { path: 'home', canActivate:[AuthGuard] , component: HomeComponent , data: { animation: 'RoutingAnimation' } },
-  { path: 'signin', component: LoginComponent },
-  { path: 'signup', component: RegistrationComponent },
-  { path: 'Profile', canActivate:[AuthGuard], component: ProfileComponent , children :[
-    {
-      path:'changeName' , component:ChangeNameComponent , outlet:'x' 
-    },
-    {
-      path:'changePass' , component:ChangePasswordComponent , outlet:'y' 
-    },
- 
-  ] },
+  { path: 'signin', component: LoginComponent, data: { animation: 'RoutingAnimation' } },
+  { path: 'signup', component: RegistrationComponent , data: { animation: 'RoutingAnimation' }},
+  { path: 'resetpassword', component: ResetPasswordComponent , data: { animation: 'RoutingAnimation' }},
+
+  { path: 'Profile', canActivate:[AuthGuard], component: ProfileComponent },
   { path: 'admin', canActivate:[AuthGuard], loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule) },
-  {path: '**', component:NotfoundComponent}
+  { path: '**', component:NotfoundComponent}
 ];
  
 @NgModule({
-  imports: [ BrowserModule,
-    BrowserAnimationsModule,  RouterModule.forRoot(routes ,{useHash:true})],
+  imports: [ BrowserModule,BrowserAnimationsModule,  RouterModule.forRoot(routes ,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

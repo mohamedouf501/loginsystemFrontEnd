@@ -11,7 +11,7 @@ export class ChangeNameComponent implements OnInit {
   @Input()  status!: boolean ;
   @Output() Changestatus = new EventEmitter<boolean>();
   @Output() NewName = new EventEmitter<string>();
-  isChanged:boolean = false
+  isNameChanged:boolean = false
   newData:any;
   constructor(private Auth:AuthService , private router:Router) { }
   ngOnInit(): void {
@@ -19,7 +19,7 @@ export class ChangeNameComponent implements OnInit {
   error:any;
   changeNameMethod(name:string)
   {     
-      this.isChanged=true
+      this.isNameChanged=true
 
     const newName ={
       name :name
@@ -27,15 +27,14 @@ export class ChangeNameComponent implements OnInit {
     this.Auth.UpdateMe(newName).subscribe({
       next:(res)=>{
         this.NewName.emit(newName.name)
-        localStorage.setItem('newNameChanged' , newName.name)
+        sessionStorage.setItem('newNameChanged' , newName.name)
       },
       error:(err)=>{
-        this.isChanged=false
+        this.isNameChanged=false
         this.error=err.message
       },
       complete:()=>{
-        this.isChanged=false
-        
+        this.isNameChanged=false
         this.Changestatus.emit(!this.status)
       }
     })
@@ -43,4 +42,5 @@ export class ChangeNameComponent implements OnInit {
   close(){
     this.Changestatus.emit(!this.status)
   }
+ 
 }

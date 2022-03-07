@@ -19,6 +19,8 @@ import { ChangePasswordComponent } from './coreModule/change-password/change-pas
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
+import { ChangeAgeComponent } from './coreModule/change-age/change-age.component';
+import { ResetPasswordComponent } from './coreModule/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import {MatIconModule} from '@angular/material/icon';
     LoadingspinnerComponent,
     ChangeNameComponent,
     ChangePasswordComponent,
+    ChangeAgeComponent,
+    ResetPasswordComponent,
 
   ],
   imports: [

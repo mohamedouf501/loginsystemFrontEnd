@@ -49,15 +49,21 @@ export class AuthService {
   }
   SignOut() {
     localStorage.removeItem('token')
+    
     this.UserDate.next(null);
     this.router.navigate(['/signin']);
   }
   
   UpdateMe(data:object){
-    console.log(this.UserDate.getValue())
     return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/updateMe`,data).pipe(catchError(this.handleError));
   }
- 
+  updateMyPassword(data:object){
+    return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/updateMyPassword`,data).pipe(catchError(this.handleError));
+  }
+  forgotPassword(data:object)
+  {
+    return this.http.post(`https://secureloginsystem.herokuapp.com/api/v1/users/forgotPassword`,data).pipe(catchError(this.handleError));
+  }
 }
 
 

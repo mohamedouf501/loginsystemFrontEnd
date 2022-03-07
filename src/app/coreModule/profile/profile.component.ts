@@ -12,24 +12,41 @@ import { ActivatedRoute, ActivatedRouteSnapshot, Router, RouterLinkActive } from
 })
 export class ProfileComponent implements OnInit {
   changeName:boolean = false ;
+  changeAge:boolean = false ;
+  changePassword:boolean = false ;
+
   name:string='';
+  age:string='';
 
   constructor(private Auth:AuthService , private router:Router, private ActivatedRoute:ActivatedRoute) {
    
   }
   User:any
   ngOnInit(): void {
-   
   this.User= this.Auth.UserDate.getValue()
   this.User =this.User.data
-  if(localStorage.getItem('newNameChanged')!= null)
+  if(sessionStorage.getItem('newNameChanged')!= null)
   {
-    this.User.name = localStorage.getItem('newNameChanged')
+    this.User.name = sessionStorage.getItem('newNameChanged')
+  }
+  if(sessionStorage.getItem('newAgeChanged')!= null)
+  { 
+    this.User.age = sessionStorage.getItem('newAgeChanged')
   }
   }
   changeNameStatus()
   {
    this.changeName = !this.changeName
+
+  }
+  changeAgeStatus()
+  {
+   this.changeAge = !this.changeAge
+
+  }
+  changePasswordStatus()
+  {
+   this.changePassword = !this.changePassword
 
   }
 }

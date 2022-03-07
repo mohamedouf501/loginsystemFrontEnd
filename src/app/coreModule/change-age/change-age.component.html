@@ -1,5 +1,5 @@
 <section  class="position-relative">
-    <div *ngIf="isNameChanged"   class="bg-light py-2  position-absolute w-100 h-100">
+    <div *ngIf="isageChanged"   class="bg-light py-2  position-absolute w-100 h-100">
         <mat-spinner class="m-auto"></mat-spinner>
     </div>
     <div  class=" container">
@@ -8,8 +8,8 @@
         <mat-icon aria-hidden="false" (click)="close()"  aria-label="Example home icon">close</mat-icon>
        </div>
        <div class="">
-        <input type="text" class="form-control" #changeNameInput placeholder="New Name">
+        <input type="text" class="form-control" #changeAgeInput placeholder="New Age">
        </div>
-        <button type="button" class="btn btn-primary my-2"  (click)="changeNameMethod(changeNameInput.value )">Save</button>
+        <button type="button" class="btn btn-primary my-2"  (click)="changeAgeMethod(changeAgeInput.value)" >Save</button>
     </div> 
 </section> 
