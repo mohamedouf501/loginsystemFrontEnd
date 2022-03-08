@@ -54,17 +54,17 @@ export class AuthService {
     this.router.navigate(['/signin']);
   }
   
-  UpdateMe(data:object){
+  UpdateMe(data:object): Observable<any> {
     return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/updateMe`,data).pipe(catchError(this.handleError));
   }
-  updateMyPassword(data:object){
+  updateMyPassword(data:object): Observable<any> {
     return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/updateMyPassword`,data).pipe(catchError(this.handleError));
   }
-  forgotPassword(data:object)
+  forgotPassword(data:object): Observable<any> 
   {
     return this.http.post(`https://secureloginsystem.herokuapp.com/api/v1/users/forgotPassword`,data).pipe(catchError(this.handleError));
   }
-resetPassword(data:any)
+resetPassword(data:any): Observable<any> 
   { 
     let body = {
       password : data.password

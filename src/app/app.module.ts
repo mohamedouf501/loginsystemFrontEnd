@@ -21,6 +21,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatIconModule} from '@angular/material/icon';
 import { ChangeAgeComponent } from './coreModule/change-age/change-age.component';
 import { ResetPasswordComponent } from './coreModule/reset-password/reset-password.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { ResetPasswordComponent } from './coreModule/reset-password/reset-passwo
     HttpClientModule,
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
+    MatTableModule
 
 
   ],
