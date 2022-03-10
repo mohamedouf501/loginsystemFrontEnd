@@ -1,6 +1,6 @@
 import { HeaderInterceptorInterceptor } from './Interceptor/header-interceptor.interceptor';
 import { LoadingspinnerComponent } from './shared/loadingspinner/loadingspinner.component';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +38,7 @@ import {MatTableModule} from '@angular/material/table';
     ChangePasswordComponent,
     ChangeAgeComponent,
     ResetPasswordComponent,
+    
 
   ],
   imports: [
@@ -48,10 +49,9 @@ import {MatTableModule} from '@angular/material/table';
     BrowserAnimationsModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatTableModule
-
-
+    MatTableModule,
   ],
+  exports:[LoadingspinnerComponent],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: HeaderInterceptorInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })

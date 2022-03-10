@@ -1,3 +1,5 @@
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoadingspinnerComponent } from './../../shared/loadingspinner/loadingspinner.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgModule } from '@angular/core';
@@ -14,11 +16,14 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 
+
 @NgModule({
   declarations: [
     AdminComponent,
     DashboradComponent,
-    NavbarAdminComponent
+    NavbarAdminComponent,
+    
+    
   ],
   imports: [
     CommonModule,
@@ -30,7 +35,11 @@ import {MatIconModule} from '@angular/material/icon';
     MatInputModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
+    
+    
+    
   ]
   ,
   exports: [

@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminServiceService } from './../../../service/admin-service.service';
 import {LiveAnnouncer} from '@angular/cdk/a11y';
 import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
@@ -25,24 +26,41 @@ export interface PeriodicElement {
   templateUrl: './dashborad.component.html',
   styleUrls: ['./dashborad.component.css']
 })
-export class DashboradComponent implements   AfterViewInit  , OnInit{
+export class DashboradComponent implements  OnInit{
   ELEMENT_DATA: PeriodicElement[] = [];
   displayedColumns: string[] = [ '_id', 'name', 'age' , 'email', 'role', 'active','emailVerified', 'update', 'delete'];
   dataSource: any;
   error:string=''
+  isLoading: boolean = false;
+  constructor(private _liveAnnouncer: LiveAnnouncer , private _AdminServiceService:AdminServiceService , private _ActivatedRoute :ActivatedRoute, private _router:Router) {}
+  ngOnInit(): void { 
+    this.isLoading = true;
+ 
+    this._AdminServiceService.GetAllUsers().subscribe({
+      next:(res)=>{
+        this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.sort = this.sort;
+        console.log(this.sort)
 
-  constructor(private _liveAnnouncer: LiveAnnouncer , private _AdminServiceService:AdminServiceService) {}
-  ngOnInit(): void {
-    this.getusers()
+      },
+      error:(err)=>{
+        this.error=err.message
+        console.log(this.error);
+        this.isLoading = false;
 
+      },
+      complete:()=>{
+        console.log("done")
+        this.isLoading = false;
 
+      }
+    })
+    this.Get()
   }
 
   @ViewChild(MatSort) sort!: MatSort 
 
-  ngAfterViewInit() {
 
-  }
 
   announceSortChange(sortState: Sort) {
     if (sortState.direction) {
@@ -55,29 +73,32 @@ export class DashboradComponent implements   AfterViewInit  , OnInit{
     this.dataSource.filter = value.trim().toLocaleLowerCase();
   }
   public redirectToUpdate = (id: string) => {
-      console.log(id)
+    this._router.navigate
   }
   public redirectToDelete = (id: string) => {
     console.log(id)
 
   }
   
-  getusers(){
-    this._AdminServiceService.GetAllUsers().subscribe({
+  Get()
+  {
+    this._ActivatedRoute.data.subscribe({
       next:(res)=>{
-        this.dataSource = new MatTableDataSource(res.data);
+        const data =res['users'].data
+        this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
-
       },
       error:(err)=>{
         this.error=err.message
+        console.log(this.error);
+
       },
       complete:()=>{
         console.log("done")
-    
       }
     })
   }
+ 
 
 }
 

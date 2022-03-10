@@ -10,6 +10,7 @@ export class AdminServiceService {
   constructor(private http:HttpClient) { }
 
   GetAllUsers(): Observable<any> {
+
     return this.http.get(`https://secureloginsystem.herokuapp.com/api/v1/users/`)
   }
 }

@@ -1,6 +1,11 @@
+
+<div *ngIf="isLoading" id="loadingspinner" class=" d-flex bg-dark  align-items-center justify-content-center "  >
+  <mat-spinner class="m-auto"></mat-spinner>
+</div> 
 <div class="d-flex justify-content-center">
-    <mat-form-field   class="text-white">
-      <input matInput type="search" class="" #search (keyup)="doFilter(search.value)"  placeholder="Filter">
+    
+    <mat-form-field   class="text-white ">
+      <input matInput type="search" class="search-Input" #search (keyup)="doFilter(search.value)"  placeholder="Filter">
     </mat-form-field>
   </div>
   <h5>{{error}}</h5>
@@ -67,7 +72,8 @@
       <th mat-header-cell *matHeaderCellDef> Delete </th>
       <td mat-cell *matCellDef="let element">
         <button mat-icon-button color="warn" (click)="redirectToDelete(element._id)">
-            <mat-icon class="mat-18">delete</mat-icon>
+            <mat-icon class="mat-18" [routerLink]="['/routePath' ,element._id ]"
+            routerLinkActive="router-link-active"  >delete</mat-icon>
         </button>
       </td>
     </ng-container>
