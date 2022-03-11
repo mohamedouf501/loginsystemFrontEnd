@@ -5,6 +5,7 @@ import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatSort, Sort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 
@@ -27,39 +28,25 @@ export interface PeriodicElement {
   styleUrls: ['./dashborad.component.css']
 })
 export class DashboradComponent implements  OnInit{
+  @ViewChild(MatSort)sort: MatSort = new MatSort; 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   ELEMENT_DATA: PeriodicElement[] = [];
+  pagenumber:number  = 1; 
+  counterData :number = 0
   displayedColumns: string[] = [ '_id', 'name', 'age' , 'email', 'role', 'active','emailVerified', 'update', 'delete'];
-  dataSource: any;
+  dataSource:any =[]
   error:string=''
   isLoading: boolean = false;
   constructor(private _liveAnnouncer: LiveAnnouncer , private _AdminServiceService:AdminServiceService , private _ActivatedRoute :ActivatedRoute, private _router:Router) {}
   ngOnInit(): void { 
     this.isLoading = true;
- 
-    this._AdminServiceService.GetAllUsers().subscribe({
-      next:(res)=>{
-        this.dataSource = new MatTableDataSource(res.data);
-        this.dataSource.sort = this.sort;
-        console.log(this.sort)
-
-      },
-      error:(err)=>{
-        this.error=err.message
-        console.log(this.error);
-        this.isLoading = false;
-
-      },
-      complete:()=>{
-        console.log("done")
-        this.isLoading = false;
-
-      }
+    let query;
+    this._ActivatedRoute.queryParamMap.subscribe((params) => {
+      query = { ...params.keys, ...params }
+     
+     this.Get(query )
     })
-    this.Get()
   }
-
-  @ViewChild(MatSort) sort!: MatSort 
-
 
 
   announceSortChange(sortState: Sort) {
@@ -76,29 +63,98 @@ export class DashboradComponent implements  OnInit{
     this._router.navigate
   }
   public redirectToDelete = (id: string) => {
-    console.log(id)
-
-  }
-  
-  Get()
-  {
-    this._ActivatedRoute.data.subscribe({
+    
+    this._AdminServiceService.DeleteUser(id).subscribe({
       next:(res)=>{
-        const data =res['users'].data
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.sort = this.sort;
+
+
       },
       error:(err)=>{
         this.error=err.message
         console.log(this.error);
+        this.isLoading = false;
 
       },
-      complete:()=>{
-        console.log("done")
+      complete:()=>{        
+        this.isLoading = false;
+
+        this.dataSource.data = this.dataSource.data.filter((u:any)=>{
+          console.log(u)
+          u._id != id
+
+      })
+
+      }
+    })
+  
+  }
+
+
+
+  Get(orderObj:any)
+  {
+   
+    this._AdminServiceService.GetAllUsers(orderObj).subscribe({
+      next:(res)=>{
+        this.counterData=res.count
+        this.dataSource = new MatTableDataSource(res.data);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error:(err)=>{
+        this.error=err.message
+        console.log(this.error);
+        this.isLoading = false;
+
+      },
+      complete:()=>{        
+        this.isLoading = false;
+        console.log()
+
       }
     })
   }
- 
+  
 
+  paginatorNextInServer()
+  {
+    if(this.counterData < 10 )
+    {
+      this.pagenumber = this.pagenumber 
+    }
+    else{
+      this.pagenumber = this.pagenumber +1
+    }
+  
+   
+    this._ActivatedRoute.queryParamMap.subscribe((params) => {
+    this._router.navigate([],{queryParams:{
+     role:params.get('role'),
+    page:this.pagenumber
+    },
+  })
+})
+ 
 }
+  paginatorPreviousInServer()
+  {
+    if( this.pagenumber <= 1)
+    {
+      this.pagenumber = 1
+    }
+    else{
+      this.pagenumber = this.pagenumber -1
+
+    }
+    this._ActivatedRoute.queryParamMap.subscribe((params) => {
+    this._router.navigate([],{queryParams:{
+     role:params.get('role'),
+    page:this.pagenumber
+    },
+  })
+})
+  }
+}
+
+
 

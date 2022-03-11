@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -9,8 +9,17 @@ export class AdminServiceService {
 
   constructor(private http:HttpClient) { }
 
-  GetAllUsers(): Observable<any> {
+  GetAllUsers(query:any): Observable<any> {    
+    const options = query ? { params: new HttpParams()
+      .set(query[0], query.params.role  )
+      .set(query[1], query.params.page)    
+    } : {};
 
-    return this.http.get(`https://secureloginsystem.herokuapp.com/api/v1/users/`)
+    return this.http.get(`https://secureloginsystem.herokuapp.com/api/v1/users/` , options)
+  }
+
+  DeleteUser(_id:string) : Observable<any> {
+    return this.http.delete( `https://secureloginsystem.herokuapp.com/api/v1/users/${_id} `)
+    
   }
 }

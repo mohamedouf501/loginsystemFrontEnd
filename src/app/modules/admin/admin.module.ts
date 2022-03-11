@@ -15,13 +15,15 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-
+import { UserDetailsComponent } from './user-details/user-details.component';
+import {MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
     AdminComponent,
     DashboradComponent,
     NavbarAdminComponent,
+    UserDetailsComponent,
     
     
   ],
@@ -36,7 +38,8 @@ import {MatIconModule} from '@angular/material/icon';
     FlexLayoutModule,
     HttpClientModule,
     MatIconModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
     
     
     
@@ -44,7 +47,8 @@ import {MatIconModule} from '@angular/material/icon';
   ,
   exports: [
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatPaginatorModule
   ]
 })
 export class AdminModule { }
