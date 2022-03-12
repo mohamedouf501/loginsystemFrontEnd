@@ -105,7 +105,7 @@ export class DashboradComponent implements OnInit {
       },
       complete: () => {
         this.isLoading = false;
-        this.dataSource = this.dataSource.data.filter((ele: any) => {
+        this.dataSource.data = this.dataSource.data.filter((ele: any) => {
           return ele._id != id
         })
       }
