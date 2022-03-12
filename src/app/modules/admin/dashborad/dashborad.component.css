@@ -24,3 +24,10 @@ table {
   z-index: 99999;
   background-color: #fbceb5;
 }
+.toolbar-search, mat-placeholder {
+  color: white;
+}
+
+ .mat-input-underline {
+    background-color: white;
+}

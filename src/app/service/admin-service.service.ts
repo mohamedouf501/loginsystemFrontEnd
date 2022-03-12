@@ -22,4 +22,9 @@ export class AdminServiceService {
     return this.http.delete( `https://secureloginsystem.herokuapp.com/api/v1/users/${_id} `)
     
   }
+  AddAdmin(_id:string) :Observable<any> {
+
+    return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/${_id}` ,null)
+
+  }
 }

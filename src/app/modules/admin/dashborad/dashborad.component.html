@@ -4,16 +4,17 @@
 </div> 
 <div class="d-flex justify-content-center">
     
-    <mat-form-field   class="text-white ">
-      <input matInput type="search" class="search-Input" #search (keyup)="doFilter(search.value)"  placeholder="Filter">
+    <mat-form-field   class="text-white col-md-3 ">
+      <input matInput type="search" class="search-Input" #search (keyup)="doFilter(search.value)">
+      <mat-placeholder>Search</mat-placeholder>
+      <mat-icon matSuffix style="font-size: 1.2em"  >search</mat-icon>
     </mat-form-field>
+   
   </div>
+ 
   <h5>{{error}}</h5>
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)"
     class="mat-elevation-z8">
-
-
-
   <ng-container matColumnDef="_id">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by _id">
       ID
@@ -60,11 +61,11 @@
     </th>
     <td mat-cell *matCellDef="let element"> {{element.emailVerified}} </td>
   </ng-container>
-  <ng-container matColumnDef="update">
-    <th mat-header-cell *matHeaderCellDef> Update </th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="accent" (click)="redirectToUpdate(element._id)">
-          <mat-icon class="mat-18">system_update</mat-icon>
+  <ng-container    matColumnDef="update">
+    <th mat-header-cell *matHeaderCellDef >  Add Admin </th>
+    <td mat-cell *matCellDef="let element"   >
+      <button mat-icon-button color="accent"   (click)="redirectToUpdate(element)">
+          <mat-icon class="mat-18" *ngIf="admin" >system_update</mat-icon>
       </button>
     </td>
   </ng-container>

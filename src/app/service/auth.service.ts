@@ -36,7 +36,7 @@ export class AuthService {
       this.setUserData();
     }
   }
-
+  
   signUp(user: object): Observable<any> {
     return this.http
       .post(`https://secureloginsystem.herokuapp.com/api/v1/users/signup`, user)
@@ -53,7 +53,7 @@ export class AuthService {
     this.UserDate.next(null);
     this.router.navigate(['/signin']);
   }
-  
+ // heroku logs --tail
   UpdateMe(data:object): Observable<any> {
     return this.http.patch(`https://secureloginsystem.herokuapp.com/api/v1/users/updateMe`,data).pipe(catchError(this.handleError));
   }

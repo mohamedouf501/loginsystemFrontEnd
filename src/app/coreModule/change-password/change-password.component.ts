@@ -27,10 +27,6 @@ export class ChangePasswordComponent implements OnInit {
     }
     this.Auth.updateMyPassword(body).subscribe({
       next:(res)=>{
-        console.log(res);
-
-        //  localStorage.setItem('token',res.token)
-        // this.Auth.setUserData()
       },
       error:(err)=>{
         this.ispassChanged=false
