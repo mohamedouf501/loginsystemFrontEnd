@@ -31,17 +31,19 @@ export class RegistrationComponent implements OnInit {
 
   submitSignUpForm(signUpForm: FormGroup) {
     this.Auth.signUp(signUpForm.value).subscribe(
-      (response) => {
+      {
+        next:(response) => {
       
-      },
-      (err) => {
-
-     this.error = err.error.message
-
-      },
-      () => {
-        
-        this.router.navigate(['/signin'])
+        },
+       error: (err) => {
+  
+       this.error = err.message
+  
+        },
+        complete:() => {
+          
+          this.router.navigate(['/signin'])
+        }
       }
     );
   }

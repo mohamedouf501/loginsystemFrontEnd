@@ -5,7 +5,7 @@
     </div> 
     <div class="container ">
         <div class=" ">
-            <h2 class=" mx-4"> SIGN UP</h2>
+            <h2 class=" mx-4"> SIGN In</h2>
             <h6 *ngIf="error" class="alert alert-danger col-md-4 m-3 ">{{error}}</h6>
             <div class="">
                 <form [formGroup]="signINForm" (ngSubmit)="submitSignINForm(signINForm)" class="">
@@ -41,7 +41,12 @@
                    
                     <a  routerLink='/resetpassword' routerLinkActive="router-link-active"  class="text-white text-decoration-none "> —For Get Your Password—</a>
                 </div>
+                <div  class="mx-5 h4 text-info ">
+                    You can log in as Admin by using <br> Email:admin@gmail.com <br>
+                    Password:123
+                </div>
             </div>
         </div>
     </div>
+   
 </section>
